@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package jwts_v1;
+
+option go_package = "/jwts_v1";
+
+import "google/protobuf/empty.proto";
+
+service Jwk {
+  rpc Get(google.protobuf.Empty) returns (JwkSet);
+}
+
+message JwkSet {
+  repeated JwkMain keys = 1;
+}
+
+message JwkMain {
+  string kty = 1;
+  string e = 2;
+  string kid = 3;
+  string alg = 4;
+  string n = 5;
+  string use = 6;
+}

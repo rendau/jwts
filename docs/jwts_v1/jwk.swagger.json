@@ -1,0 +1,84 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "jwts_v1/jwk.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Jwk"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "jwts_v1JwkMain": {
+      "type": "object",
+      "properties": {
+        "kty": {
+          "type": "string"
+        },
+        "e": {
+          "type": "string"
+        },
+        "kid": {
+          "type": "string"
+        },
+        "alg": {
+          "type": "string"
+        },
+        "n": {
+          "type": "string"
+        },
+        "use": {
+          "type": "string"
+        }
+      }
+    },
+    "jwts_v1JwkSet": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/jwts_v1JwkMain"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

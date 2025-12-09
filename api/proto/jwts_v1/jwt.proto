@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package jwts_v1;
+
+option go_package = "/jwts_v1";
+
+service Jwt {
+  rpc Create(JwtCreateReq) returns (JwtCreateRep);
+  rpc Validate(JwtValidateReq) returns (JwtValidateRep);
+}
+
+message JwtCreateReq {
+  string sub = 1;
+  int64 exp_seconds = 2;
+  bytes payload = 3; // json encoded payload
+}
+
+message JwtCreateRep {
+  string token = 1;
+}
+
+message JwtValidateReq {
+  string token = 1;
+}
+
+message JwtValidateRep {
+  bool valid = 1;
+  bytes claims = 2;
+}

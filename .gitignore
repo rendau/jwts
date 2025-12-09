@@ -9,3 +9,4 @@ keys/
 conf.yml
 .migrate_scripts
 /svc
+.env
