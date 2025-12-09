@@ -9,24 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OWNER: rendau
-      IMAGE: jwts
+      IMAGE: jwts:latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v5
         with:
-          go-version: '>=1.19.0'
+          go-version-file: go.mod
+          cache: 'false'
 
       - run: go mod download
-
-      - run: go install github.com/swaggo/swag/cmd/swag@v1.8.4
-
-      - run: make swdoc
 
       - run: make
 
       - run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $ --password-stdin
 
-      - run: docker build -t ghcr.io/$OWNER/$IMAGE:latest .
+      - run: docker build -t ghcr.io/$OWNER/$IMAGE .
 
-      - run: docker push ghcr.io/$OWNER/$IMAGE:latest
+      - run: docker push ghcr.io/$OWNER/$IMAGE

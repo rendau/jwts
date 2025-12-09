@@ -6,7 +6,6 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/golang/protobuf/proto"
 	otgrpc "github.com/opentracing-contrib/go-grpc"
 	"github.com/opentracing/opentracing-go"
 	"github.com/prometheus/client_golang/prometheus"
@@ -14,6 +13,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/protoadapt"
 
 	"github.com/rendau/jwts/internal/errs"
 	"github.com/rendau/jwts/pkg/proto/common"
@@ -80,7 +80,7 @@ func GrpcInterceptorError() grpc.UnaryServerInterceptor {
 			return h, nil
 		}
 
-		var ei proto.Message
+		var ei protoadapt.MessageV1
 		errStr := err.Error()
 
 		var errBase errs.Err
